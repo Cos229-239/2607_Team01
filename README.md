@@ -10,3 +10,4 @@ Prototype pages:
 ##Team members
 - Peter Gabriel
 - Monica Bliss
+- Caneka Stewart
