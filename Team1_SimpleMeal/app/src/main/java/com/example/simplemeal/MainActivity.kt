@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -112,26 +113,35 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
 
                 //login Button
                 val bwitdth =100.dp// val == value
-                Button(onClick = {
+                Button(onClick = {},colors = ButtonDefaults.buttonColors(
+                    containerColor = BluePrimary,
 
-                }) {
+                    )
+                ) {
                     Text(
                         text = "Login",
                         textAlign = TextAlign.Center,
                         fontFamily = InterDisplay,
                         fontSize = 24.sp,
-                        modifier = modifier.width(bwitdth)
+                        modifier = modifier.width(bwitdth),
+                        color = SnowDisplay
                     )
                 }
                 Spacer(modifier = modifier.height(4.dp))
                 //Sign-Up Button
-                Button(onClick = {}) {
+                Button(onClick = {},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = BluePrimary,
+
+                    )
+                ) {
                     Text(
                         text = "Sign up",
                         textAlign = TextAlign.Center,
                         fontFamily = InterDisplay,
                         fontSize = 24.sp,
-                        modifier = modifier.width(bwitdth)
+                        modifier = modifier.width(bwitdth),
+                        color = SnowDisplay
                     )
                 }
 
