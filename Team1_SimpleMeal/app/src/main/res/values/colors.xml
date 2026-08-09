@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Simple Meal Brand Palette -->
+    <color name="brand_primary_teal">#14080E</color>  <!-- Header bar background -->
+    <color name="brand_pink_accent">#F786AA</color>   <!-- Active elements / highlights -->
+    <color name="brand_pink_dark">#D35289</color>     <!-- Primary CTA / Save buttons -->
+    <color name="brand_cream_bg">#FFFCFF</color>      <!-- Card backgrounds -->
+    <color name="brand_brown">#4C2719</color>         <!-- Text and outlines -->
 </resources>
