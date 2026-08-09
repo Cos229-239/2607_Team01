@@ -1,6 +1,5 @@
 package com.example.simplemeal
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,9 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,13 +25,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simplemeal.ui.theme.BluePrimary
+import com.example.simplemeal.ui.theme.InterDisplay
+import com.example.simplemeal.ui.theme.IntelBody
 import com.example.simplemeal.ui.theme.SimpleMealTheme
 import com.example.simplemeal.ui.theme.SnowDisplay
 
@@ -44,6 +42,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SimpleMealTheme {//This is the same as Main in Visual Studio
+
                 LoginScreen(
                     name = "Guest",
                     modifier = Modifier.padding()
@@ -78,8 +77,8 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
             modifier = modifier.background(BluePrimary)
                 .fillMaxWidth().padding(vertical = 40.dp),
             textAlign = TextAlign.Center,
-            fontFamily = FontFamily.Serif,//till we import our own font
-            fontWeight = FontWeight.Bold
+            fontFamily = InterDisplay,//our display font for headers
+            fontWeight = FontWeight.Black
 
         )
         //profile icon
@@ -89,7 +88,8 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
             text = name,
             fontSize = 24.sp,
             textAlign = TextAlign.Center,
-            fontFamily = FontFamily.Serif
+            fontFamily = IntelBody,//our body text font
+            fontWeight = FontWeight.Normal
         )
 
         Spacer(modifier=modifier.height(16.dp))//this is how you make space between obj
@@ -118,7 +118,7 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
                     Text(
                         text = "Login",
                         textAlign = TextAlign.Center,
-                        fontFamily = FontFamily.Serif,
+                        fontFamily = InterDisplay,
                         fontSize = 24.sp,
                         modifier = modifier.width(bwitdth)
                     )
@@ -129,7 +129,7 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
                     Text(
                         text = "Sign up",
                         textAlign = TextAlign.Center,
-                        fontFamily = FontFamily.Serif,
+                        fontFamily = InterDisplay,
                         fontSize = 24.sp,
                         modifier = modifier.width(bwitdth)
                     )
