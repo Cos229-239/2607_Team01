@@ -2,6 +2,7 @@ package com.example.simplemeal.ui.loginscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,7 +35,7 @@ import com.example.simplemeal.ui.theme.InterDisplay
 import com.example.simplemeal.ui.theme.SnowDisplay
 
 @Composable //The device I selected was Pixel 10 pro XL (had the most API)
-fun LoginScreen(name: String, modifier: Modifier = Modifier) {
+fun LoginScreen(onButtonPressed: () -> Unit,name: String, modifier: Modifier = Modifier) {
 
     var usrname by remember {
         mutableStateOf("")
@@ -125,6 +126,17 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
                     )
                 }
 
+                Spacer(modifier = modifier.height(4.dp))
+
+                Text(
+                    text = "Continue as Guest",
+                    textAlign = TextAlign.Center,
+                    fontFamily = IntelBody,
+                    modifier = Modifier.clickable(onClick = onButtonPressed)//-> exmple navigaton
+                                                                            //when api
+                )
+
+
 
             }
 
@@ -138,6 +150,6 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    LoginScreen("Guest")
+fun LoginPreview() {
+    LoginScreen(onButtonPressed = {},"Guest")
 }

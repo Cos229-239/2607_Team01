@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
@@ -16,8 +17,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import com.example.simplemeal.ui.NavKeys.route1_0_Login
+import com.example.simplemeal.ui.NavKeys.route5_0_Profile
 import com.example.simplemeal.ui.theme.SimpleMealTheme
 import com.example.simplemeal.ui.loginscreen.LoginScreen
+
+
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,19 +51,18 @@ fun SimpleMealApp(modifier: Modifier = Modifier){
                         when (key) {
 
                             is route1_0_Login -> NavEntry(key) {
-                                LoginScreen("Guest")
+                                LoginScreen(onButtonPressed = {backStack.add(route5_0_Profile)},"Guest")
                             }
-                            else -> NavEntry(key){
-
+                            is route5_0_Profile -> NavEntry(key){
+                                ProfileScreen()
                             }
-
+                            else -> NavEntry(key){}
                         }
-
                     }
-
                 )
             }
         }
+
     }
 }
 
@@ -70,6 +73,6 @@ fun SimpleMealApp(modifier: Modifier = Modifier){
 // three strips next to a phone press that and the preview screen will Pop up.
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-   SimpleMealApp()
+fun MainPreview() {
+    SimpleMealApp()
 }

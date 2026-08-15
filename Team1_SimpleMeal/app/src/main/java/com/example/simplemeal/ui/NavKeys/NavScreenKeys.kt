@@ -12,4 +12,4 @@ data object route1_0_Login
 
 //data object route4_0_GroceryList
 
-//data object route5_0_Profile
+data object route5_0_Profile
