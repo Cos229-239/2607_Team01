@@ -15,12 +15,12 @@ fun GroceryListScreen()
     Column (modifier = Modifier.padding(16.dp))
     {
         Text(text = "Grocery List")
-       Row 
-       {
-        Checkbox(checked = false, onCheckedChange = null)
-        Text(text = "2 Tomatoes")
+        Row()
+        {
+            Checkbox(checked = false, onCheckedChange = null)
+            Text(text = "2 Tomatoes")
         }
-        Row 
+        Row()
         {
             Checkbox(checked = false, onCheckedChange = null)
             Text(text = "1 lb Chicken Breast")
