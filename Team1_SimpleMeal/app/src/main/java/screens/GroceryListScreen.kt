@@ -7,7 +7,9 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.simplemeal.ProfileScreen
 
 @Composable
 fun GroceryListScreen()
@@ -26,4 +28,12 @@ fun GroceryListScreen()
             Text(text = "1 lb Chicken Breast")
         }
     }
+}
+
+
+
+@Preview(showBackground = true)
+@Composable
+fun GroceryListPreview() {
+    GroceryListScreen()
 }
