@@ -8,13 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.simplemeal.ui.NavKeys.route1_0_Login
 import com.example.simplemeal.ui.NavKeys.route5_0_Profile
@@ -37,7 +35,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SimpleMealApp(modifier: Modifier = Modifier){
 
-    val backStack = remember {mutableStateListOf<Any>(route1_0_Login)}
+    val backStack = rememberNavBackStack(route1_0_Login("Guest"))
 
     SimpleMealTheme {//This is the same as Main in Visual Studio
         Scaffold(modifier = Modifier.fillMaxSize()){innerPadding ->
@@ -51,12 +49,13 @@ fun SimpleMealApp(modifier: Modifier = Modifier){
                         when (key) {
 
                             is route1_0_Login -> NavEntry(key) {
-                                LoginScreen(onButtonPressed = {backStack.add(route5_0_Profile)},"Guest")
+                                LoginScreen(onButtonPressed = {backStack.add(route5_0_Profile(name = key.name))},name = key.name)
                             }
                             is route5_0_Profile -> NavEntry(key){
                                 ProfileScreen()
                             }
                             else -> NavEntry(key){}
+
                         }
                     }
                 )
