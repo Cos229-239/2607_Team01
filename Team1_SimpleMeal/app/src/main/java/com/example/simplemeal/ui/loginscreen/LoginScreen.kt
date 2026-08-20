@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -29,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simplemeal.R
+import com.example.simplemeal.ui.theme.BlackText
 import com.example.simplemeal.ui.theme.BluePrimary
 import com.example.simplemeal.ui.theme.IntelBody
 import com.example.simplemeal.ui.theme.InterDisplay
@@ -37,12 +39,23 @@ import com.example.simplemeal.ui.theme.SnowDisplay
 @Composable //The device I selected was Pixel 10 pro XL (had the most API)
 fun LoginScreen(onButtonPressed: () -> Unit,name: String, modifier: Modifier = Modifier) {
 
+    val loginInfoStorage = remember{ mutableMapOf<String,String>()}
+
     var usrname by remember {
         mutableStateOf("")
     }
     var pswlog by remember {
         mutableStateOf("")
     }
+    var errorMsgUser by remember {
+        mutableStateOf("")
+    }
+
+    var errorMsgPsw by remember {
+        mutableStateOf("")
+    }
+
+
     Column(//column allow you to stack obj vertically (row horizontal) like putting a box on-top a box
         horizontalAlignment = Alignment.CenterHorizontally,
 
@@ -76,25 +89,55 @@ fun LoginScreen(onButtonPressed: () -> Unit,name: String, modifier: Modifier = M
 
         Spacer(modifier=modifier.height(16.dp))//this is how you make space between obj
         //Username Box
-        OutlinedTextField(value = usrname, onValueChange = {usrname = it},
-            label = { Text(text = "UserName")}
+        OutlinedTextField(
+            value = usrname,
+            onValueChange = {usrname = it},
+            label = {
+                Text(
+                    errorMsgUser.ifEmpty { "Username" },
+                    color = if (errorMsgUser.isNotEmpty()) Color.Red else BlackText
+                )
+            }
         )
+
         Spacer(modifier=modifier.height(4.dp))
+
         //Password box
-        OutlinedTextField(value = pswlog, onValueChange = {pswlog = it}, label = {
-            Text(
-                text = "Password"
-            )
-        }
+        OutlinedTextField(
+            value = pswlog,
+            onValueChange = {pswlog = it},
+            label = {
+                Text(
+                    errorMsgPsw.ifEmpty { "Password" },
+                    color = if(errorMsgPsw.isNotEmpty()) Color.Red else BlackText
+                )
+            }
         )
+
         //this is a box, works almost the same as a column or row can be used to make mini section
         //just wanted to show another way of doing something
         Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+
+
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
                 //login Button
                 val bwitdth =100.dp// val == value
-                Button(onClick = {},colors = ButtonDefaults.buttonColors(
+                Button(onClick = {
+
+                    if(loginInfoStorage.containsKey(usrname) && loginInfoStorage[usrname] == pswlog){
+                        onButtonPressed()
+                    }
+                    else if(loginInfoStorage.containsKey(usrname) && loginInfoStorage[usrname] != pswlog){
+                        errorMsgPsw = "Password is incorrect"
+                    }
+                    else if(!(loginInfoStorage.containsKey(usrname))){
+                        errorMsgUser ="Profile not found"
+                        errorMsgPsw ="Press Signup to create Profile"
+
+                    }
+
+                },colors = ButtonDefaults.buttonColors(
                     containerColor = BluePrimary,
 
                     )
@@ -108,9 +151,15 @@ fun LoginScreen(onButtonPressed: () -> Unit,name: String, modifier: Modifier = M
                         color = SnowDisplay
                     )
                 }
+
                 Spacer(modifier = modifier.height(4.dp))
+
                 //Sign-Up Button
-                Button(onClick = {},
+                Button(onClick = {
+
+                    loginInfoStorage[usrname] = pswlog
+
+                },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = BluePrimary,
 
@@ -132,8 +181,8 @@ fun LoginScreen(onButtonPressed: () -> Unit,name: String, modifier: Modifier = M
                     text = "Continue as Guest",
                     textAlign = TextAlign.Center,
                     fontFamily = IntelBody,
-                    modifier = Modifier.clickable(onClick = onButtonPressed)//-> exmple navigaton
-                                                                            //when api
+                    modifier = Modifier.clickable(onClick = onButtonPressed)
+
                 )
 
 
