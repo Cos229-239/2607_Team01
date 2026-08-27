@@ -175,7 +175,7 @@ fun LoginScreen(onButtonPressed: () -> Unit,name: String, modifier: Modifier = M
                     )
                 }
 
-                Spacer(modifier = modifier.height(4.dp))
+                Spacer(modifier = modifier.height(10.dp))
 
                 Text(
                     text = "Continue as Guest",

@@ -10,8 +10,8 @@ data class route1_0_Login(var name: String) : NavKey
 //data object route1_1_Signin
 
 //data object route1_3_ContinueAsGuest
-
-//data object route2_0_DashBoard
+@Serializable
+data class route2_0_DashBoard(var name: String): NavKey
 @Serializable
 data class route3_0_MealPlanScreen(var name: String) : NavKey{
 }

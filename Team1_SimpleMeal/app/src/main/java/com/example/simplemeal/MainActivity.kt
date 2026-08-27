@@ -15,8 +15,10 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.simplemeal.ui.NavKeys.route1_0_Login
+import com.example.simplemeal.ui.NavKeys.route2_0_DashBoard
 import com.example.simplemeal.ui.NavKeys.route3_0_MealPlanScreen
 import com.example.simplemeal.ui.NavKeys.route5_0_Profile
+import com.example.simplemeal.ui.homescreen.HomeScreen
 import com.example.simplemeal.ui.theme.SimpleMealTheme
 import com.example.simplemeal.ui.loginscreen.LoginScreen
 
@@ -50,7 +52,11 @@ fun SimpleMealApp(modifier: Modifier = Modifier){
                         when (key) {
 
                             is route1_0_Login -> NavEntry(key) {
-                                LoginScreen(onButtonPressed = {backStack.add(route3_0_MealPlanScreen(name = key.name))},name = key.name)
+                                //route3_0_MealPlanScreen(name = key.name)
+                                LoginScreen(onButtonPressed = {backStack.add(route2_0_DashBoard("Guest"))},name = key.name)
+                            }
+                            is route2_0_DashBoard -> NavEntry(key){
+                                HomeScreen()
                             }
                             is route5_0_Profile -> NavEntry(key){
                                 ProfileScreen()
