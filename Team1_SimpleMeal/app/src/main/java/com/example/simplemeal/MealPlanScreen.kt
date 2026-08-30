@@ -10,6 +10,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImage
+
+
+
 
 @Composable
 fun MealPlanScreen(
@@ -66,6 +74,18 @@ fun MealPlanScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            if (!imageUrl.isNullOrEmpty()) {
+                AsyncImage(
+                    model = imageUrl,
+                    contentDescription = "Meal Image",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .clip(RoundedCornerShape(8.dp)),
+                    contentScale = ContentScale.Crop
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
 
             if (mealTitle.isNotEmpty()) {
                 Text(
@@ -97,4 +117,14 @@ fun MealPlanScreen(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MealPlanScreenPreview() {
+    MealPlanScreen(
+        mealTitle = "Pasta Primavera",
+        mealCategory = "Italian | Vegetarian",
+        mealInstructions = "Boil pasta. Sauté fresh vegetables in olive oil and garlic. Toss together with parmesan cheese."
+    )
 }
