@@ -115,12 +115,12 @@ fun FourImageDisplay(apiService: MealApiService, onImageClick: (String)-> Unit){
 
             repeat(4){
                 try{
-                val response = apiService.getRandomMeal()
-                val meal = response.meals?.firstOrNull()
+                    val response = apiService.getRandomMeal()
+                    val meal = response.meals?.firstOrNull()
 
-                meal?.strMealThumb?.let{ url ->
-                    mealImageContainer.add(url)
-                }
+                    meal?.strMealThumb?.let{ url ->
+                        mealImageContainer.add(url)
+                    }
                 }catch(e: Exception){
 
                 }
@@ -144,7 +144,7 @@ fun FourImageDisplay(apiService: MealApiService, onImageClick: (String)-> Unit){
         items(displayUrls) { currentUrl ->
 
             GlideImage(
-                imageModel =  {"currentUrl"},
+                imageModel =  {currentUrl},
                 modifier = Modifier
                     .aspectRatio(1f)
                     .clickable {
