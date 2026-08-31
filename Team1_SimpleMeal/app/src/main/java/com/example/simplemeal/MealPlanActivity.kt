@@ -1,21 +1,20 @@
 package com.example.simplemeal
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MealPlanActivity : AppCompatActivity() {
+class MealPlanActivity : ComponentActivity() {
 
     private val apiService: MealApiService by lazy {
         Retrofit.Builder()
@@ -25,25 +24,27 @@ class MealPlanActivity : AppCompatActivity() {
             .create(MealApiService::class.java)
     }
 
+    // Reactive Compose state variables
+    private var mealTitle by mutableStateOf("")
+    private var mealCategory by mutableStateOf("")
+    private var mealInstructions by mutableStateOf("")
+    private var imageUrl by mutableStateOf<String?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meal_plan)
 
-        val etSearch = findViewById<EditText>(R.id.etSearch)
-        val btnSearch = findViewById<Button>(R.id.btnSearch)
-        val btnRandom = findViewById<Button>(R.id.btnRandom)
-
-        btnSearch.setOnClickListener {
-            val query = etSearch.text.toString().trim()
-            if (query.isNotEmpty()) {
-                fetchMeal(query)
-            }
+        setContent {
+            MealPlanScreen(
+                mealTitle = mealTitle,
+                mealCategory = mealCategory,
+                mealInstructions = mealInstructions,
+                imageUrl = imageUrl,
+                onSearchClick = { query -> fetchMeal(query) },
+                onRandomClick = { fetchRandomMeal() }
+            )
         }
 
-        btnRandom.setOnClickListener {
-            fetchRandomMeal()
-        }
-
+        // Initial fetch
         fetchRandomMeal()
     }
 
@@ -52,7 +53,6 @@ class MealPlanActivity : AppCompatActivity() {
             try {
                 val response = apiService.searchMeals(query)
                 val meal = response.meals?.firstOrNull()
-
                 withContext(Dispatchers.Main) {
                     if (meal != null) {
                         displayMeal(meal)
@@ -73,7 +73,6 @@ class MealPlanActivity : AppCompatActivity() {
             try {
                 val response = apiService.getRandomMeal()
                 val meal = response.meals?.firstOrNull()
-
                 withContext(Dispatchers.Main) {
                     meal?.let { displayMeal(it) }
                 }
@@ -86,12 +85,9 @@ class MealPlanActivity : AppCompatActivity() {
     }
 
     private fun displayMeal(meal: Meal) {
-        findViewById<TextView>(R.id.tvMealTitle).text = meal.strMeal
-        findViewById<TextView>(R.id.tvCategory).text = "${meal.strCategory ?: ""} | ${meal.strArea ?: ""}"
-        findViewById<TextView>(R.id.tvInstructions).text = meal.strInstructions
-
-        Glide.with(this)
-            .load(meal.strMealThumb)
-            .into(findViewById<ImageView>(R.id.ivMealImage))
+        mealTitle = meal.strMeal ?: ""
+        mealCategory = "${meal.strCategory ?: ""} | ${meal.strArea ?: ""}"
+        mealInstructions = meal.strInstructions ?: ""
+        imageUrl = meal.strMealThumb
     }
 }

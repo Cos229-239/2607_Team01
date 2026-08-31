@@ -45,7 +45,9 @@ dependencies {
     implementation("com.github.skydoves:landscapist-glide:2.4.7")
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
+    implementation("io.coil-kt:coil-compose:2.7.0")
     implementation(libs.androidx.activity.ktx)
+    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.adaptive.navigation3)
     implementation(libs.androidx.compose.material3)
@@ -69,4 +71,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
 }
