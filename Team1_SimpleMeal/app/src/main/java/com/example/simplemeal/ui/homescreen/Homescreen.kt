@@ -174,9 +174,12 @@ fun FourImageDisplay(apiService: MealApiService, onImageClick: ()-> Unit){
                 imageModel =  {currentUrl.first},
                 modifier = Modifier
                     .aspectRatio(1f)
-                    .clickable (
-                        onClick = onImageClick
-                    )
+                    .clickable {
+                        onImageClick()
+
+                    }
+
+
             )
 
             Spacer(modifier = Modifier.height(10.dp))
