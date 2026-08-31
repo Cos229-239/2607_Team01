@@ -40,7 +40,8 @@ class MealPlanActivity : ComponentActivity() {
                 mealInstructions = mealInstructions,
                 imageUrl = imageUrl,
                 onSearchClick = { query -> fetchMeal(query) },
-                onRandomClick = { fetchRandomMeal() }
+                onRandomClick = { fetchRandomMeal() },
+                onListButtonPressed = {}
             )
         }
 

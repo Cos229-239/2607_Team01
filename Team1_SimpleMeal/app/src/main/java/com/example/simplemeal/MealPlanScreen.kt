@@ -12,12 +12,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
-
-
-
+import com.example.simplemeal.ui.theme.BluePrimary
+import com.example.simplemeal.ui.theme.InterDisplay
+import com.example.simplemeal.ui.theme.SnowDisplay
 
 
 @Composable
@@ -28,7 +31,8 @@ fun MealPlanScreen(
     mealTitle: String = "",
     mealCategory: String = "",
     mealInstructions: String = "",
-    imageUrl: String? = null
+    imageUrl: String? = null,
+    onListButtonPressed: () -> Unit
 ) {
     var searchQuery by remember { mutableStateOf("") }
 
@@ -116,6 +120,29 @@ fun MealPlanScreen(
                     maxLines = 6
                 )
             }
+
+            Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.fillMaxSize()){
+
+                Button(onClick = { onListButtonPressed()
+
+
+                },colors = ButtonDefaults.buttonColors(
+                    containerColor = BluePrimary,
+
+                    )
+                ) {
+                    Text(
+                        text = "Create List",
+                        textAlign = TextAlign.Center,
+                        fontFamily = InterDisplay,
+                        fontSize = 24.sp,
+                        color = SnowDisplay
+                    )
+                }
+
+
+            }
+
         }
     }
 }
@@ -126,7 +153,8 @@ fun MealPlanPreview() {
     MealPlanScreen(
         mealTitle = "Pasta Primavera",
         mealCategory = "Italian | Vegetarian",
-        mealInstructions = "Boil pasta. Sauté fresh vegetables in olive oil and garlic. Toss together with parmesan cheese."
+        mealInstructions = "Boil pasta. Sauté fresh vegetables in olive oil and garlic. Toss together with parmesan cheese.",
+        onListButtonPressed = {}
     )
 }
 

@@ -146,6 +146,7 @@ fun FourImageDisplay(apiService: MealApiService, onImageClick: ()-> Unit){
 
                 val url = meal?.strMealThumb
                 val title = meal?.strMeal
+                //val ingrediant = meal?.idMeal
 
                 mealImageContainer.add(Pair(url,title))
             }

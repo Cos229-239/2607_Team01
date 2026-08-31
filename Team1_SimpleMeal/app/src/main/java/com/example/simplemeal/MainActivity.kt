@@ -73,7 +73,8 @@ fun SimpleMealApp(modifier: Modifier = Modifier){
                                 ProfileScreen()
                             }
                             is route3_0_MealPlanScreen -> NavEntry(key){
-                                MealPlanScreen()
+                                MealPlanScreen(onListButtonPressed = {backStack.add(
+                                    route4_0_GroceryList("Guest"))})
                             }
                             is route4_0_GroceryList -> NavEntry(key){
                                 GroceryScreen()
