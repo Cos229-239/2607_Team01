@@ -17,6 +17,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.example.simplemeal.ui.NavKeys.route1_0_Login
 import com.example.simplemeal.ui.NavKeys.route2_0_DashBoard
 import com.example.simplemeal.ui.NavKeys.route3_0_MealPlanScreen
+import com.example.simplemeal.ui.NavKeys.route4_0_GroceryList
 import com.example.simplemeal.ui.NavKeys.route5_0_Profile
 import com.example.simplemeal.ui.homescreen.HomeScreen
 import com.example.simplemeal.ui.theme.SimpleMealTheme
@@ -53,16 +54,29 @@ fun SimpleMealApp(modifier: Modifier = Modifier){
 
                             is route1_0_Login -> NavEntry(key) {
                                 //route3_0_MealPlanScreen(name = key.name)
-                                LoginScreen(onButtonPressed = {backStack.add(route2_0_DashBoard("Guest"))},name = key.name)
+                                LoginScreen(
+                                    onButtonPressed = {
+                                    backStack.add(route2_0_DashBoard("Guest"))
+                                    },
+                                    name = key.name)
                             }
                             is route2_0_DashBoard -> NavEntry(key){
-                                HomeScreen()
+                                HomeScreen(
+
+                                    onProfileButtonPressed = { backStack.add(route5_0_Profile("Guest"))},
+                                    onMealImagePressed = { backStack.add(route3_0_MealPlanScreen("Guest"))}
+
+
+                                )
                             }
                             is route5_0_Profile -> NavEntry(key){
                                 ProfileScreen()
                             }
                             is route3_0_MealPlanScreen -> NavEntry(key){
                                 MealPlanScreen()
+                            }
+                            is route4_0_GroceryList -> NavEntry(key){
+                                GroceryScreen()
                             }
                             else -> NavEntry(key){}
 

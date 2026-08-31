@@ -132,8 +132,3 @@ fun MealPlanPreview() {
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun MealPlanScreenPreview() {
-    MealPlanScreen()
-}
